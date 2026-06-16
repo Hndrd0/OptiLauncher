@@ -68,6 +68,14 @@ public class AsyncAssetManager {
 
                 Tools.copyAssetFile(ctx, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
                 Tools.copyAssetFile(ctx,"resolv.conf",Tools.DIR_DATA, false);
+                
+                // Extract custom mods
+                String[] customMods = ctx.getAssets().list("custom_mods");
+                if (customMods != null) {
+                    for (String mod : customMods) {
+                        Tools.copyAssetFile(ctx, "custom_mods/" + mod, Tools.DIR_GAME_NEW + "/mods", false);
+                    }
+                }
             } catch (IOException e) {
                 Log.e("AsyncAssetManager", "Failed to unpack critical components !");
             }
